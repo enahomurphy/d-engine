@@ -69,9 +69,10 @@ class Canvas {
    */
   circle(x, y, d) {
     const ctx = this.context;
+    ctx.beginPath()
     ctx.arc(x, y, d, 0, Math.PI * 2);
     ctx.fill();
-  
+    ctx.closePath();
     return this;
   }
 

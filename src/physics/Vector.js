@@ -26,6 +26,16 @@ class Vector {
     return this;
   }
 
+  mult(magnitude) {
+    this.y = this.y * magnitude;
+    this.x = this.x * magnitude;
+  }
+
+  div(magnitude) {
+    this.y = this.y / magnitude;
+    this.x = this.x / magnitude;
+  }
+
   static createVector(x, y) {
     return new Vector(x, y);
   }

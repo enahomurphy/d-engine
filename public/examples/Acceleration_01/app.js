@@ -1,49 +1,45 @@
-import { canvas } from '../index';
+import { canvas, physics, utils } from '../index';
 
-const gameScreen = new canvas.Canvas(500, 500);
+const gameScreen = new canvas.Canvas(630, 500);
 
 window.gameScreen = gameScreen;
-gameScreen.background('black');
+gameScreen.background('#5b5b5b;');
 
 class Walker {
   constructor(canvas) {
-    this.x = canvas.width * 0.5;
-    this.y = canvas.height * 0.5;
+    this.velocity = physics.Vector.createVector(0, 0)
+    this.pos = physics.Vector.createVector(
+      canvas.height * 0.5,
+      canvas.width * 0.5,
+    )
+
     this.canvas = canvas;
   }
 
   draw() {
     this.canvas
-      .point(this.x, this.y)
-      .fill('white');
+      .circle(this.pos.x, this.pos.y, 20)
+      .fill('black')
   }
 
-
   step() {
-    const random = parseInt(Math.random() * 4);
-    switch (random) {
-      case 0:
-        this.x++;
-        break;
-      case 1:
-        this.x--;
-        break;
-      case 2:
-        this.y++;
-        break;
-      case 3:
-        this.y--;
-        break;
-    }
+    const ax = utils.random(-1, 1);
+    const ay = utils.random(-1, 1);
+    this.acc = physics.Vector.createVector(ax, ay);
+    this.acc.div(5);
+
+    this.velocity.add(this.acc);
+    this.pos.add(this.velocity);
   }
 }
 
 const walker = new Walker(gameScreen);
 
 function loop() {
+  gameScreen.background('#5b5b5b');
+
   walker.draw();
   walker.step();
-
   window.requestAnimationFrame(loop);
 }
 
