@@ -17,14 +17,14 @@ class Canvas {
     if (canvas) {
       return canvas;
     }
+
     return this.createCanvas(this.id, this.width, this.height);
   }
 
   createCanvas(id, width, height) {
-    const canvas = document.createElement('canvas');
-    const canvasId = id ? id : random(`the-game${random(0, 10)}`)
+    const canvas = document.createElement('canvas');    
 
-    canvas.setAttribute('id', canvasId);
+    canvas.setAttribute('id', id);
     canvas.setAttribute('width', width);
     canvas.setAttribute('height', height);
 
@@ -55,7 +55,8 @@ class Canvas {
   }
 
   close() {
-    this.context.closePath();
+    const ctx = this.context;
+    ctx.closePath();
     return this;
   }
 
@@ -71,8 +72,6 @@ class Canvas {
     const ctx = this.context;
     ctx.beginPath()
     ctx.arc(x, y, d, 0, Math.PI * 2);
-    ctx.fill();
-    ctx.closePath();
     return this;
   }
 
