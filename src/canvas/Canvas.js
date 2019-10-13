@@ -48,6 +48,8 @@ class Canvas {
     ctx.strokeStyle = style;
     ctx.lineWidth = width;
     ctx.stroke();
+
+    return this;
   }
 
   fill(value = '#ffffff') {
