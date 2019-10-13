@@ -1,4 +1,8 @@
-import { random } from '../utils'
+import { random } from '../utils';
+import Circle from './Circle';
+import Segment from './Segment';
+import Point from './Point';
+import Rectangle from './Rectangle';
 
 class Canvas {
   constructor(width, height, id) {
@@ -60,26 +64,10 @@ class Canvas {
     return this;
   }
 
-
-
-  /**
-   * This draws a circle on the canvas base on the x y d values
-   * @param {number} x Number: x-coordinate of the centre of the circle. 
-   * @param {*} y Number: y-coordinate of the centre of the circle.
-   * @param {*} d Number: diameter of the circle.
-   */
   circle(x, y, d) {
     const ctx = this.context;
     ctx.beginPath()
-    ctx.arc(x, y, d, 0, Math.PI * 2);
-    return this;
-  }
-
-  stroke(color = '#000000') {
-    const ctx = this.context;
-    ctx.strokeStyle  = color;
-    ctx.stroke();
-
+    ctx.arc(x, y, d, 0, Math.PI * 2, true);
     return this;
   }
 
@@ -91,20 +79,9 @@ class Canvas {
   }
 
   point(x, y) {
-    const ctx = this.context;
-    ctx.fillRect(x, y, 1, 1);
-
-    return this
+    return this.circle(x, y, 1);
   }
 
-  /**
-   * This uses two  bezierCurveTo pinned
-   * to each other ro achieve an eclipse
-   * @param {number} x Number: x-coordinate of the centre of the circle. 
-   * @param {number} y Number: y-coordinate of the centre of the circle.
-   * @param {number} height Number: Height of the eclipse
-   * @param {number} height Number: Width of the eclipse
-   */
   ellipse(x, y, height, width) {
     const ctx = this.context;
     ctx.beginPath();
@@ -123,6 +100,40 @@ class Canvas {
 
     return this;
   }
+
+  rect(x, y, w, h) {
+    const ctx = this.context;
+    ctx.beginPath();
+    ctx.rect(x,y, w, h);
+
+    return this;
+  }
+
+  segment(x1, y1, x2, y2) {
+    const ctx = this.context;
+    ctx.beginPath();
+    ctx.moveTo(x1, y1);
+    ctx.lineTo(x2, y2);
+    ctx.stroke();
+
+    return this;
+  }
+
+  createCircle(x, y, c) {
+    return new Circle(this, x, y, c);
+  }
+
+  createSegment(x, y, vx, vy) {
+    return new Segment(this, x, y, vx, vy);
+  }
+
+  createPoint(x, y) {
+    return new Point(this, x, y);
+  } 
+
+  createRectangle(x, y, width, height) {
+    return new Rectangle(this, x, y, width, height);
+  } 
 }
 
 export default Canvas;

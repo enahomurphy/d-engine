@@ -21,7 +21,7 @@ class Vector {
 
   sub(vector) {
     this.x = this.x - vector.x;
-    this.y = this.x - vector.y;
+    this.y = this.y - vector.y;
 
     return this;
   }
@@ -35,7 +35,7 @@ class Vector {
     this.x = this.x / magnitude;
     this.y = this.y / magnitude;
   }
-
+  
   mag() {
     return Math.hypot(this.x, this.y);
   }
@@ -45,15 +45,15 @@ class Vector {
     this.mult(magnitude)
   }
 
-  normalize() {
+  normalize() { 
     const m = this.mag();
     if (m > 0) {
       this.div(m);
     }
   }
 
-  log() {
-    console.log(this.x, this.y)
+  log(value = '') {
+    console.log(this.x, this.y, value)
   }
 
   static createVector(x, y) {
@@ -67,12 +67,33 @@ class Vector {
     return new Vector(x, y);
   }
 
+  static add(vector1, vector2) {
+    const x = vector1.x + vector2.x;
+    const y = vector1.y + vector2.y;
+
+    return new Vector(x, y);
+  }
 
   static div(vector, magnitude) {
     const newVector = Vector.createVector(vector.x, vector.y);
 
     newVector.div(magnitude);
 
+    return newVector;
+  }
+
+  static mult(vector, magnitude) {
+    const newVector = Vector.createVector(vector.x, vector.y);
+
+    newVector.mult(magnitude);
+
+    return newVector;
+  }
+
+  static normalize(x, y) { 
+    const newVector = new Vector(x, y);
+    newVector.normalize();
+    
     return newVector;
   }
 }

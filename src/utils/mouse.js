@@ -1,4 +1,3 @@
-
 let eventRegistered = false;
 
 let mouseX = 0;

@@ -6,6 +6,10 @@ class Collision {
   elastic(restitution) {
     this.restitution = restitution || .2
   }
+
+  detectCircle () {
+    
+  }
 }
 
 export default Collision;
