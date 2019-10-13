@@ -1,13 +1,12 @@
 class Point {
-  constructor(canvas, x, y) {
-    this.x = x;
-    this.y = y;
+  constructor(canvas, position) {
+    this.position = position;
     this.canvas = canvas;
   }
 
   draw(fill = 'black') {
     this.canvas
-      .point(this.x, this.y, 1)
+      .point(this.position.x, this.position.y, 1)
       .stroke(fill)
   }
 }
