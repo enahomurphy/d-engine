@@ -1,4 +1,4 @@
-import { canvas, physics, utils } from '../index';
+import { canvas, physics, utils } from 'the-game';
 
 const gameScreen = new canvas.Canvas(630, 500);
 

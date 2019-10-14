@@ -52,6 +52,11 @@ class Vector {
     }
   }
 
+  reset() {
+    this.x = 0;
+    this.y = 0;
+  }
+
   log(value = '') {
     console.log(this.x, this.y, value)
   }

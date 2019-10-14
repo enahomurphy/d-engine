@@ -23,11 +23,10 @@ Ball.prototype.applyForce = function (force) {
 
 Ball.prototype.draw = function () {
   screen
-  .ellipse(
+  .circle(
     this.position.x,
     this.position.y,
-    this.mass * 16,
-    this.mass * 16
+    this.mass * 6,
   )
   .fill(this.color)
   .stroke('black', 0)
@@ -57,7 +56,6 @@ Ball.prototype.calculateWallForce = function() {
 
   return PVector.createVector(x, y);
 }
-
 
 document.getElementById(screen.id).addEventListener('click', () => {
   const mouseX = event.clientX;

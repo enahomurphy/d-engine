@@ -1,4 +1,4 @@
-import { canvas } from '../index';
+import { canvas } from 'the-game';
 
 const gameScreen = new canvas.Canvas(500, 500);
 
@@ -17,7 +17,6 @@ class Walker {
       .point(this.x, this.y)
       .fill('white');
   }
-
 
   step() {
     const random = parseInt(Math.random() * 4);

@@ -131,7 +131,6 @@ class Canvas {
 
   drawImage(image, x, y, width, height) {
     const ctx = this.context;
-    console.log(image)
     ctx.drawImage(
       image,
       x,
@@ -141,8 +140,8 @@ class Canvas {
     );  
   };  
 
-  createCircle(x, y, c) {
-    return new Circle(this, x, y, c);
+  createCircle(position, radius) {
+    return new Circle(this, position, radius);
   }
 
   createSegment(x, y, vx, vy) {
