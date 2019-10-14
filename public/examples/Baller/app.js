@@ -1,4 +1,4 @@
-import { canvas, physics, utils, engine } from '../../../index';
+import { canvas, physics, utils, engine } from 'the-game';
 
 const screen = new canvas.Canvas(500, 500);
 const width = screen.width;
@@ -58,10 +58,8 @@ Ball.prototype.calculateWallForce = function() {
   return PVector.createVector(x, y);
 }
 
-console.log(document.getElementById(screen.id))
 
 document.getElementById(screen.id).addEventListener('click', () => {
-  console.log("I was called")
   const mouseX = event.clientX;
   const mouseY = event.clientY;
 
@@ -69,7 +67,6 @@ document.getElementById(screen.id).addEventListener('click', () => {
 });
 
 const balls = Array(10).fill(1).map(() => new Ball(random(0.1, 5), 10, 10))
-console.log(balls)
 function draw() {
   screen.background('white');
   
@@ -85,7 +82,5 @@ function draw() {
   }
 }
 
-engine.gameLoop(
-  60,
-  { draw }
-)
+const Loop = new engine.GameLoop({ fps: 60 });
+Loop.load(draw).start()

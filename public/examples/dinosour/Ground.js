@@ -2,7 +2,7 @@ import { physics, canvas } from 'the-game';
 
 const PVector = physics.Vector;
 
-class Tree extends canvas.Rectangle {
+class Ground extends canvas.Rectangle {
   constructor(canvas, x, y, width, height) {
     super(
       canvas,
@@ -10,15 +10,28 @@ class Tree extends canvas.Rectangle {
       width,
       height
     );
+
     this.acceleration = new PVector(-3 , 0);
   }
 
-  isEdge() {
-    return (this.position.x <= this.width * -1);
+  checkEdge() {
+    if (this.checkEnd()) {
+      this.position.x = this.width;
+    }
   }
+
+  checkEnd() {
+    if (Math.abs(this.position.x) >= this.width) {
+      return true;
+    }
+
+    return false;
+  }
+
 
   move() {
     this.position.add(this.acceleration);
+    this.checkEdge()
   }
 
   stop() {
@@ -30,4 +43,4 @@ class Tree extends canvas.Rectangle {
   }
 }
 
-export default Tree;
+export default Ground;

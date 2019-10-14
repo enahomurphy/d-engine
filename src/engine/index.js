@@ -1,1 +1,1 @@
-export { default as gameLoop } from './loop';
+export { default as GameLoop } from './loop';

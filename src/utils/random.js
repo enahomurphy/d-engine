@@ -3,7 +3,13 @@ const random = (minNumber, maxNumber) => {
     return random(0, minNumber);
   }
 
-  return (minNumber + Math.random() * (maxNumber + 1 - minNumber)).toFixed(1)
+  if (minNumber % 1 === 0 || maxNumber % 1 === 0) {
+    return Math.floor(
+      minNumber + Math.random() * (maxNumber + 1 - minNumber)
+    );
+  }
+
+  return (minNumber + Math.random() * (maxNumber + 1 - minNumber)).toFixed(1);
 };
 
-export default  random;
+export default random;

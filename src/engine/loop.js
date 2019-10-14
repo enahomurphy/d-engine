@@ -2,27 +2,27 @@
 let frameCount = 0;
 let fpsInterval, startTime, now, then, elapsed;
 
-const getDefaults = (config) => {
-  if (!config.draw) {
-    return { ...config, draw: () => {} }
-  }
-
-  return config;
-}
-
-function animate (fps, config) {
-    fpsInterval = 1000 / fps;
+function Engine (config = {}) {
+    fpsInterval = 1000 / config.fps;
     then = window.performance.now();
     startTime = then;
-    loop.bind(getDefaults(config)).call();
+
+    this.showFrame = config.showFrame || false;
+    this.stopEngine = false;
 }
 
-function loop (timestamp) {
-  if (this.stop) {
+Engine.prototype.load = function(draw) {
+  this.draw = draw;
+
+  return this;
+}
+
+Engine.prototype.start = function (timestamp) {
+  if (this.stopEngine) {
       return;
   }
 
-  requestAnimationFrame(loop.bind(this));
+  requestAnimationFrame(this.start.bind(this));
 
   now = timestamp;
   elapsed = timestamp - then;
@@ -41,4 +41,8 @@ function loop (timestamp) {
   }
 }
 
-export default animate;
+Engine.prototype.stop = function() {
+  this.stopEngine = true;
+}
+
+export default Engine;

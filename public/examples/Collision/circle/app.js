@@ -25,7 +25,5 @@ function draw() {
   }
 }
 
-engine.gameLoop(
-  50,
-  { draw }
-)
+const Loop = new engine.GameLoop({ fps: 60 });
+Loop.load(draw).start()

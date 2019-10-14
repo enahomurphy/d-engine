@@ -111,6 +111,14 @@ class Canvas {
     return this;
   }
 
+  image(x, y, w, h) {
+    const ctx = this.context;
+    ctx.beginPath();
+    ctx.rect(x,y, w, h);
+
+    return this;
+  }
+
   segment(x1, y1, x2, y2) {
     const ctx = this.context;
     ctx.beginPath();
@@ -121,6 +129,18 @@ class Canvas {
     return this;
   }
 
+  drawImage(image, x, y, width, height) {
+    const ctx = this.context;
+    console.log(image)
+    ctx.drawImage(
+      image,
+      x,
+      y,
+      width,
+      height
+    );  
+  };  
+
   createCircle(x, y, c) {
     return new Circle(this, x, y, c);
   }
@@ -129,12 +149,12 @@ class Canvas {
     return new Segment(this, x, y, vx, vy);
   }
 
-  createPoint(x, y) {
-    return new Point(this, x, y);
+  createPoint(position) {
+    return new Point(this, position);
   } 
 
-  createRectangle(x, y, width, height) {
-    return new Rectangle(this, x, y, width, height);
+  createRectangle(position, width, height) {
+    return new Rectangle(this, position, width, height);
   } 
 }
 
