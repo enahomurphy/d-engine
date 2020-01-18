@@ -3,7 +3,7 @@ import { canvas, physics, utils } from 'the-game';
 const gameScreen = new canvas.Canvas(630, 500);
 
 window.gameScreen = gameScreen;
-gameScreen.background('#5b5b5b;');
+gameScreen.background('#5b5b5b');
 
 class Walker {
   constructor(canvas) {

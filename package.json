@@ -22,8 +22,6 @@
     "parcel": "^1.12.3"
   },
   "alias": {
-    "react": "preact-compat",
-    "react-dom": "preact-compat",
     "the-game": "./index.js"
   }
 }

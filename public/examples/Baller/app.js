@@ -13,7 +13,7 @@ function Ball(mass, x = 0, y = 0) {
   this.acceleration = PVector.createVector(0, 0);
   this.velocity = PVector.createVector(0, 0);
   this.color = color(random(255), random(255), random(255), 127);
-
+  this.radius = this.mass * 6;
 }
 
 Ball.prototype.applyForce = function (force) {
@@ -26,7 +26,7 @@ Ball.prototype.draw = function () {
   .circle(
     this.position.x,
     this.position.y,
-    this.mass * 6,
+    this.radius,
   )
   .fill(this.color)
   .stroke('black', 0)
@@ -42,15 +42,15 @@ Ball.prototype.calculateWallForce = function() {
   let x = 0;
   let y = 0;
 
-  if (this.position.x < 0) {
+  if (this.position.x < this.radius) {
     x = 1;
-  } else if (this.position.x > (width - (this.mass * 16))) {
+  } else if (this.position.x > (width - this.radius)) {
     x = -1;
   }
 
-  if (this.position.y < 0) {
+  if (this.position.y < 100) {
     y = 1;
-  } else if (this.position.y > height) {
+  } else if (this.position.y > height - 30) {
     y = -1;
   }
 
@@ -65,8 +65,9 @@ document.getElementById(screen.id).addEventListener('click', () => {
 });
 
 const balls = Array(10).fill(1).map(() => new Ball(random(0.1, 5), 10, 10))
+const ball = new Ball(1, screen.width /2, screen.height / 2)
 function draw() {
-  screen.background('white');
+  screen.background('lightGray');
   
   for (let ball = 0; ball < balls.length; ball++) {
     const force = PVector.createVector(0, 0.1);
@@ -78,6 +79,14 @@ function draw() {
     balls[ball].update();
     balls[ball].draw();
   }
+
+  const gravity = PVector.createVector(0, 0.1);
+  const wallForce = ball.calculateWallForce();
+
+  ball.applyForce(wallForce);
+  ball.applyForce(gravity);
+  ball.update();
+  ball.draw();
 }
 
 const Loop = new engine.GameLoop({ fps: 60 });

@@ -23,7 +23,7 @@ class Walker {
     const mouse = utils.mouse(this.canvas.id);
     const mouseVector = physics.Vector.createVector(mouse.mouseX, mouse.mouseY);
     this.acc = physics.Vector.sub(mouseVector, this.pos);
-    this.acc.setMag(0.4)
+    this.acc.setMag(0.1)
 
 
     this.velocity.add(this.acc);

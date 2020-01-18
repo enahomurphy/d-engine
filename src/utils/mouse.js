@@ -5,7 +5,8 @@ let mouseY = 0;
 
 export default (canvasId) => {
   if (!eventRegistered) {
-    document.getElementById(canvasId).addEventListener('mousemove', () => {
+    const element = canvasId ? document.getElementById(canvasId) : document;
+    element.addEventListener('mousemove', () => {
       mouseX = event.clientX;
       mouseY = event.clientY;
   

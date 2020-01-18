@@ -18,18 +18,18 @@ class Walker {
 
   draw() {
     this.canvas
-      .ellipse(this.pos.x, this.pos.y, 40, 40)
+      .circle(this.pos.x, this.pos.y, 20)
       .fill('#ffffff');
   }
 
   step() {
     this.pos.add(this.velocity);
 
-    if (this.pos.x > (this.canvas.width - 10) || this.pos.x < 0) {
+    if (this.pos.x > (this.canvas.width - 20) || this.pos.x < 20) {
       this.velocity = physics.Vector.createVector((this.velocity.x * -1), this.velocity.y)
     }
 
-    if (this.pos.y > (this.canvas.height - 10) || this.pos.y < 0) {
+    if (this.pos.y > (this.canvas.height - 20) || this.pos.y < 20) {
       this.velocity = physics.Vector.createVector(this.velocity.x, (this.velocity.y  * -1));
     }
   }

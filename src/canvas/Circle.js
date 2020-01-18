@@ -1,28 +1,31 @@
 import Segment from './Segment';
 
 class Circle {
-  constructor(canvas, x, y, radius) {
-    this.x = x;
-    this.y = y;
-    this.canvas = canvas;
+  constructor(canvas, vector, radius) {
+    this.position = vector;
     this.radius = radius;
-    this.radiusLine = new Segment(canvas, x, y, this.radius , 0);
+    this.radiusLine = new Segment(canvas, vector.x, vector.y, this.radius , 0);
   }
 
   draw(fill = 'black', strokeColor, strokeWidth = 0) {
     if (!strokeColor) {
       strokeColor = fill;
     }
+
     this.canvas
-      .circle(this.x, this.y, this.radius)
+      .circle(this.position.x, this.position.y, this.radius)
       .fill(fill)
       .stroke(strokeColor, strokeWidth);
-
-      this.radiusLine.draw('blue');
   }
 
   pointInCircle(px, py) {
-    const line = new Segment(this.canvas, px, py, this.x - px,  this.y - py);
+    const line = new Segment(
+      this.canvas,
+      px,
+      py,
+      this.position.x - px, 
+      this.position.y - py
+    );
   
     if (line.length() <= this.radiusLine.length()) {
       return true;
@@ -31,7 +34,22 @@ class Circle {
     return false;
   }
 
-  
+  rectInCircle(rectangle) {
+    let x = this.position.x;
+    let y = this.position.y;
+
+    if (rectangle.position.x < rectangle.position.x) x = rectangle.position.x;
+    else if (this.position.x > rectangle.position.x + rectangle.width) x = rectangle.position.x + rectangle.width;
+
+    if (this.position.y < rectangle.position.y) y = rectangle.position.y;
+    else if (rectangle.position.y > rectangle.position.y + rectangle.height) y = rectangle.position.x + rectangle.width;
+
+    const distX = this.position.x - x;
+    const distY = this.position.y - y;
+    const distance = Math.hypot(distX, distY);
+
+    return (distance <= this.radius);
+  }
 }
 
 export default Circle;

@@ -50,6 +50,7 @@ class Rectangle {
   // If the circle is to the LEFT of the square, check against the LEFT edge.
   // If the circle is ABOVE the square, check against the TOP edge.
   // If the circle is to the BELOW the square, check against the BOTTOM edge.
+  // http://jeffreythompson.org/collision-detection/circle-rect.phpz
   circleInRectangle(circle) {
     let x = circle.position.x;
     let y = circle.position.y;
@@ -58,7 +59,7 @@ class Rectangle {
     else if (circle.position.x > this.position.x + this.width) x = this.position.x + this.width;
 
     if (circle.position.y < this.position.y) y = this.position.y;
-    else if (this.position.y > this.position.y + this.height) y = this.position.x + this.width;
+    else if (circle.position.y > (this.position.y + this.height)) y = this.position.y + this.height;
 
     const distX = circle.position.x - x;
     const distY = circle.position.y - y;

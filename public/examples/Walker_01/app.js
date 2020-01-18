@@ -14,7 +14,7 @@ class Walker {
 
   draw() {
     this.canvas
-      .point(this.x, this.y)
+      .circle(this.x, this.y, 50)
       .fill('white');
   }
 
@@ -35,13 +35,20 @@ class Walker {
         break;
     }
   }
+
+  move() {
+    // this.x += 1;
+    this.y -= 1;
+  }
 }
 
 const walker = new Walker(gameScreen);
 
 function loop() {
+  gameScreen.background('black');
+
   walker.draw();
-  walker.step();
+  walker.move();
 
   window.requestAnimationFrame(loop);
 }
